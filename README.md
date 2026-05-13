@@ -63,7 +63,7 @@ body{background:#F5F5F5;color:#212121;font-size:14px;padding-bottom:70px;padding
     <div class="logo"><span class="hitam">Kurir</span><span class="merah">Tiktok</span></div>
     <div class="kota" id="kota">Tanahgrogot</div>
   </div>
-  <div class="status-bar" id="statusBar">BUKA - 08:00 s/d 23:00</div>
+  <div class="status-bar" id="statusBar">BUKA - 08:00 s/d 21:00</div>
 </div>
 
 <div class="card">
