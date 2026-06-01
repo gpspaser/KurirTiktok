@@ -1,3 +1,4 @@
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -33,6 +34,13 @@ body{background:#f9fafb;padding-bottom:70px}
 .banner-dots{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:6px}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5)}
 .dot.active{background:#fff}
+
+/* JADWAL SHOLAT GRID BARU */
+.sholat-title{font-size:14px;font-weight:700;color:var(--gray-700);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sholat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px}
+.sholat-item{background:#fff;border-radius:10px;padding:10px 4px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid var(--gray-200)}
+.sholat-nama{font-size:11px;color:var(--gray-500);margin-bottom:4px;font-weight:600}
+.sholat-jam{font-size:14px;color:var(--tosca-dark);font-weight:700}
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
 .grid-item{background:#fff;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
@@ -89,6 +97,31 @@ textarea{resize:none;height:60px}
       <div class="banner-dots">
         <span class="dot active"></span>
         <span class="dot"></span>
+      </div>
+    </div>
+
+    <!-- GRID JADWAL SHOLAT MANUAL -->
+    <div class="sholat-title">🕌 Jadwal Sholat Kab.Paser</div>
+    <div class="sholat-grid">
+      <div class="sholat-item">
+        <div class="sholat-nama">Subuh</div>
+        <div class="sholat-jam">04:50</div>
+      </div>
+      <div class="sholat-item">
+        <div class="sholat-nama">Dzuhur</div>
+        <div class="sholat-jam">12:13</div>
+      </div>
+      <div class="sholat-item">
+        <div class="sholat-nama">Asar</div>
+        <div class="sholat-jam">15:38</div>
+      </div>
+      <div class="sholat-item">
+        <div class="sholat-nama">Magrib</div>
+        <div class="sholat-jam">18:14</div>
+      </div>
+      <div class="sholat-item">
+        <div class="sholat-nama">Isya</div>
+        <div class="sholat-jam">19:28</div>
       </div>
     </div>
 
@@ -263,7 +296,7 @@ function isOnline(){
   const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
   const wita = new Date(utc + (3600000 * 8));
   const hour = wita.getHours();
-  return hour >= 8 && hour < 21; // 17:00 WITA tutup
+  return hour >= 8 && hour < 17;
 }
 
 // STATUS ONLINE/OFFLINE - TAMPILKAN JAM WITA
@@ -275,7 +308,7 @@ function cekJamOperasional(){
   const menit = wita.getMinutes();
   const statusText = document.getElementById('statusText');
 
-  if(hour >= 8 && hour < 21){
+  if(hour >= 8 && hour < 17){
     statusText.innerHTML = `<span class="status-badge status-online">Online - ${hour}:${menit.toString().padStart(2,'0')} WITA</span>`;
   }else{
     statusText.innerHTML = `<span class="status-badge status-offline">Offline - ${hour}:${menit.toString().padStart(2,'0')} WITA</span>`;
@@ -393,8 +426,8 @@ function kirimUndanganWA(){
     return;
   }
 
-  const tanggalFormat = new Date(tanggal).toLocaleDateString('id-ID', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
-  let pesan = '';
+  const tanggalFormat = new Date(tanggal).toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  let isiUndangan = '';
   let judul = '';
 
   if(jenis=='pernikahan'){
@@ -402,94 +435,128 @@ function kirimUndanganWA(){
     const wanita = document.getElementById('namaWanita').value;
     const ortuPria = document.getElementById('ortuPria').value;
     const ortuWanita = document.getElementById('ortuWanita').value;
-    judul = 'UNDANGAN PERNIKAHAN';
-    pesan = `*${judul}*%0A%0A`;
-    pesan += `Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan putra-putri kami:%0A%0A`;
-    pesan += `*${pria}*%0A`;
-    pesan += `Putra dari ${ortuPria}%0A%0A`;
-    pesan += `*DAN*%0A%0A`;
-    pesan += `*${wanita}*%0A`;
-    pesan += `Putri dari ${ortuWanita}%0A%0A`;
+    judul = '💍 UNDANGAN PERNIKAHAN 💍';
+    isiUndangan = `Assalamu'alaikum Warahmatullahi Wabarakatuh\n`;
+    isiUndangan += `Dengan memohon rahmat dan ridho Allah SWT\n`;
+    isiUndangan += `Kami bermaksud mengundang Bapak/Ibu/Saudara/i\n`;
+    isiUndangan += `untuk menghadiri acara pernikahan putra-putri kami:\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `*${pria}*\n`;
+    isiUndangan += `Putra dari ${ortuPria}\n\n`;
+    isiUndangan += `DENGAN\n`;
+    isiUndangan += `*${wanita}*\n`;
+    isiUndangan += `Putri dari ${ortuWanita}\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
   if(jenis=='tasmiah'){
     const namaBayi = document.getElementById('namaBayi').value;
     const ortuBayi = document.getElementById('ortuBayi').value;
     const jk = document.getElementById('jkBayi').value;
-    judul = 'UNDANGAN TASMIAH';
-    pesan = `*${judul}*%0A%0A`;
-    pesan += `Alhamdulillah, dengan penuh syukur kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara tasmiah dan aqiqah putra/putri kami:%0A%0A`;
-    pesan += `*${namaBayi}*%0A`;
-    pesan += `${jk} dari ${ortuBayi}%0A%0A`;
+    judul = '👶 UNDANGAN TASMIAH & AQIQAH 👶';
+    isiUndangan = `Alhamdulillah\n`;
+    isiUndangan += `Dengan penuh syukur kami mengundang Bapak/Ibu/Saudara/i\n`;
+    isiUndangan += `untuk hadir pada acara tasmiah & aqiqah putra/putri kami:\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `*${namaBayi}*\n`;
+    isiUndangan += `${jk} dari ${ortuBayi}\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
   if(jenis=='haji'){
     const namaJamaah = document.getElementById('namaJamaah').value;
     const tujuan = document.getElementById('tujuanHaji').value;
-    judul = `UNDANGAN ${tujuan.toUpperCase()}`;
-    pesan = `*${judul}*%0A%0A`;
-    pesan += `Alhamdulillah, dengan mengharap ridho Allah SWT, kami sekeluarga mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pelepasan keberangkatan ${tujuan}:%0A%0A`;
-    pesan += `*${namaJamaah}*%0A%0A`;
+    judul = `🕋 UNDANGAN PELEPASAN ${tujuan.toUpperCase()} 🕋`;
+    isiUndangan = `Alhamdulillah\n`;
+    isiUndangan += `Dengan mengharap ridho Allah SWT\n`;
+    isiUndangan += `Kami sekeluarga mengundang Bapak/Ibu/Saudara/i\n`;
+    isiUndangan += `untuk menghadiri acara pelepasan keberangkatan ${tujuan}:\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `*${namaJamaah}*\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
   if(jenis=='ultah'){
     const nama = document.getElementById('namaUltah').value;
     const usia = document.getElementById('usiaUltah').value;
-    judul = 'UNDANGAN ULANG TAHUN';
-    pesan = `*${judul}*%0A%0A`;
-    pesan += `Yuk hadir dan rayakan ulang tahun ${nama} yang ke-${usia} bersama kami!%0A%0A`;
+    judul = `🎉 UNDANGAN ULANG TAHUN 🎉`;
+    isiUndangan = `Yuk hadir dan rayakan ulang tahun:\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `*${nama}*\n`;
+    isiUndangan += `yang ke-${usia} tahun\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
   if(jenis=='khitan'){
     const namaAnak = document.getElementById('namaKhitan').value;
     const ortu = document.getElementById('ortuKhitan').value;
-    judul = 'UNDANGAN SYUKURAN KHITAN';
-    pesan = `*${judul}*%0A%0A`;
-    pesan += `Dengan memanjatkan puji syukur kehadirat Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara syukuran khitanan putra kami:%0A%0A`;
-    pesan += `*${namaAnak}*%0A`;
-    pesan += `Putra dari ${ortu}%0A%0A`;
+    judul = '✂️ UNDANGAN SYUKURAN KHITAN ✂️';
+    isiUndangan = `Dengan memanjatkan puji syukur kehadirat Allah SWT\n`;
+    isiUndangan += `Kami mengundang Bapak/Ibu/Saudara/i\n`;
+    isiUndangan += `untuk hadir pada acara syukuran khitanan putra kami:\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `*${namaAnak}*\n`;
+    isiUndangan += `Putra dari ${ortu}\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
   if(jenis=='maulid'){
     const tema = document.getElementById('temaMaulid').value;
     const penceramah = document.getElementById('penceramahMaulid').value;
-    judul = 'UNDANGAN MAULID NABI';
-    pesan = `*${judul} Muhammad SAW*%0A%0A`;
-    pesan += `Mari hadir bersama dalam acara peringatan Maulid Nabi Muhammad SAW dengan tema:%0A`;
-    pesan += `*${tema}*%0A%0A`;
-    pesan += `Penceramah: ${penceramah}%0A%0A`;
+    judul = '📿 UNDANGAN MAULID NABI MUHAMMAD SAW 📿';
+    isiUndangan = `Mari hadir bersama dalam acara:\n\n`;
+    isiUndangan += `*Peringatan Maulid Nabi Muhammad SAW*\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `Tema: ${tema}\n`;
+    isiUndangan += `Penceramah: ${penceramah}\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
   if(jenis=='isra'){
     const tema = document.getElementById('temaIsra').value;
     const penceramah = document.getElementById('penceramahIsra').value;
-    judul = "UNDANGAN ISRA' MI'RAJ";
-    pesan = `*${judul}*%0A%0A`;
-    pesan += `Dalam rangka memperingati Isra' Mi'raj Nabi Muhammad SAW dengan tema:%0A`;
-    pesan += `*${tema}*%0A%0A`;
-    pesan += `Penceramah: ${penceramah}%0A%0A`;
+    judul = "🌙 UNDANGAN ISRA' MI'RAJ 🌙";
+    isiUndangan = `Dalam rangka memperingati:\n\n`;
+    isiUndangan += `*Isra' Mi'raj Nabi Muhammad SAW*\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `Tema: ${tema}\n`;
+    isiUndangan += `Penceramah: ${penceramah}\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
   if(jenis=='haul'){
     const nama = document.getElementById('namaAlmarhum').value;
     const haulKe = document.getElementById('haulKe').value;
-    judul = 'UNDANGAN HAUL/TAHLIL';
-    pesan = `*${judul}*%0A%0A`;
-    pesan += `Dengan memohon doa restu, kami mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara haul ke-${haulKe} almarhum/almarhumah:%0A%0A`;
-    pesan += `*${nama}*%0A%0A`;
+    judul = '🤲 UNDANGAN HAUL & TAHLIL 🤲';
+    isiUndangan = `Dengan memohon doa restu\n`;
+    isiUndangan += `Kami mengundang Bapak/Ibu/Saudara/i\n`;
+    isiUndangan += `untuk hadir pada acara haul ke-${haulKe}:\n\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n`;
+    isiUndangan += `*Alm/Almh. ${nama}*\n`;
+    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
   }
 
-  pesan += `📅 ${tanggalFormat}%0A`;
-  pesan += `🕐 ${jam} WITA%0A`;
-  pesan += `📍 ${tempat}%0A%0A`;
-  if(ucapan) pesan += `${ucapan}%0A%0A`;
-  pesan += `Kehadiran Bapak/Ibu/Saudara/i merupakan suatu kehormatan bagi kami.%0A`;
-  pesan += `Wassalamu'alaikum Wr. Wb.`;
+  // BAGIAN WAKTU & TEMPAT - FORMAT RAPI
+  isiUndangan += `📅 Hari/Tanggal : ${tanggalFormat}\n`;
+  isiUndangan += `⏰ Waktu        : ${jam} WITA\n`;
+  isiUndangan += `📍 Tempat       : ${tempat}\n\n`;
+
+  if(ucapan) isiUndangan += `${ucapan}\n\n`;
+
+  isiUndangan += `Merupakan suatu kehormatan & kebahagiaan\n`;
+  isiUndangan += `bagi kami apabila Bapak/Ibu/Saudara/i\n`;
+  isiUndangan += `berkenan hadir untuk memberikan doa restu.\n\n`;
+  isiUndangan += `Atas kehadirannya kami ucapkan terima kasih.\n\n`;
+  isiUndangan += `Wassalamu'alaikum Warahmatullahi Wabarakatuh 🙏`;
+
+ // GABUNG JUDUL + ISI LALU ENCODE
+  const pesanLengkap = `${judul}\n\n${isiUndangan}`;
+  const pesanEncode = encodeURIComponent(pesanLengkap);
 
   let waFormat = waTeman;
   if(waFormat.startsWith('0')) waFormat = '62' + waFormat.substring(1);
 
-  window.open(`https://wa.me/${waFormat}?text=${pesan}`,'_blank');
+  window.open(`https://wa.me/${waFormat}?text=${pesanEncode}`,'_blank');
   alert('Undangan terkirim ke WhatsApp teman!');
   closeModal();
 }
@@ -572,8 +639,7 @@ function tambahBelanja(){
   input.style.marginBottom='8px';
   document.getElementById('belanjaList').appendChild(input);
 }
-
-// AKUN AUTO SAVE
+  // AKUN AUTO SAVE
 function loadAkun(){
   document.getElementById('akunNama').value = akun.nama;
   document.getElementById('akunAlamat').value = akun.alamat;
