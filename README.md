@@ -1,702 +1,211 @@
-
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurir Supra</title>
-<link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
+<title>GPS KURIR-Tanahgrogot</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 <style>
-:root{
-  --tosca:#14b8a6;
-  --tosca-dark:#0d9488;
-  --tosca-light:#ccfbf1;
-  --danger:#ef4444;
-  --gray-100:#f3f4f6;
-  --gray-200:#e5e7eb;
-  --gray-500:#6b7280;
-  --gray-700:#374151;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-body{background:#f9fafb;padding-bottom:70px}
-
-.header{position:fixed;top:0;left:0;right:0;background:var(--tosca);color:#fff;padding:12px 16px;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-.header-top{display:flex;justify-content:space-between;align-items:center}
-.header-title{font-family:'Goldman',sans-serif;font-size:20px;font-weight:700}
-.header-desc{font-size:11px;opacity:0.9;margin-top:2px}
-.status-badge{font-size:12px;padding:6px 12px;border-radius:20px;font-weight:600}
-.status-online{background:#fff;color:var(--tosca)}
-.status-offline{background:#fee2e2;color:#dc2626}
-
-.content{margin-top:80px;padding:16px}
-.banner{border-radius:12px;overflow:hidden;margin-bottom:16px;position:relative;height:140px;background:var(--tosca-light)}
-.banner-slide{display:none;width:100%;height:100%;object-fit:cover}
-.banner-slide.active{display:block}
-.banner-dots{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:6px}
-.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5)}
-.dot.active{background:#fff}
-
-/* JADWAL SHOLAT GRID BARU */
-.sholat-title{font-size:14px;font-weight:700;color:var(--gray-700);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.sholat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px}
-.sholat-item{background:#fff;border-radius:10px;padding:10px 4px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid var(--gray-200)}
-.sholat-nama{font-size:11px;color:var(--gray-500);margin-bottom:4px;font-weight:600}
-.sholat-jam{font-size:14px;color:var(--tosca-dark);font-weight:700}
-
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.grid-item{background:#fff;border-radius:12px;padding:16px 8px;text-align:center;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
-.grid-item:active{transform:scale(0.95)}
-.grid-icon{width:40px;height:40px;background:var(--tosca-light);border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;color:var(--tosca);font-size:20px}
-.grid-item p{font-size:12px;font-weight:600;color:var(--gray-700)}
-
-.footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--gray-200);display:flex;justify-content:space-around;padding:8px 0;max-width:480px;margin:0 auto}
-.nav-item{text-align:center;font-size:11px;color:var(--gray-500);cursor:pointer;padding:6px 12px}
-.nav-item.active{color:var(--tosca)}
-.nav-item svg{width:24px;height:24px;margin:0 auto 2px;display:block}
-
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:100;align-items:flex-end;justify-content:center}
+:root{--gold:#FFD700;--hitam:#0d0d0d;--hitam2:#1a1a1a;--putih:#fff;--abu:#ccc;--hijau:#25D366}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:var(--hitam);color:var(--putih);padding-bottom:70px}
+.header{position:fixed;top:0;left:0;right:0;background:var(--hitam2);color:var(--gold);padding:12px 16px;z-index:1000;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--gold)}
+.header h1{font-size:16px;font-weight:700}
+.header-date{text-align:right;font-size:11px;color:var(--abu)}
+.marquee{background:var(--gold);color:var(--hitam);padding:6px;overflow:hidden;white-space:nowrap;margin-top:52px;font-weight:600;font-size:12px}
+.marquee span{display:inline-block;animation:marq 30s linear infinite}
+@keyframes marq{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.container{padding:16px}
+.section-title{font-size:14px;font-weight:700;margin:14px 0 8px;color:var(--gold);border-left:3px solid var(--gold);padding-left:8px}
+.layanan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.layanan-card{background:var(--hitam2);border:1px solid #333;border-radius:12px;padding:20px 14px;text-align:center;cursor:pointer;transition:0.2s}
+.layanan-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.layanan-card i{font-size:32px;color:var(--gold);margin-bottom:8px;display:block}
+.layanan-card span{font-size:13px;font-weight:700}
+.tarif-info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.tarif-info-card{background:var(--hitam2);border:1px dashed #555;border-radius:8px;padding:8px;text-align:center;font-size:11px;color:var(--abu)}
+.tarif-info-km{font-weight:700;color:var(--gold)}
+.tarif-info-note{font-size:10px;color:var(--abu);margin-top:10px;text-align:center;font-style:italic}
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:2000;align-items:center;justify-content:center;padding:16px}
 .modal.active{display:flex}
-.modal-content{background:#fff;width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:20px;max-height:85vh;overflow-y:auto}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;font-size:13px;color:var(--gray-700);margin-bottom:6px;font-weight:600}
-.input,textarea,select{width:100%;padding:10px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:14px}
-.input:focus,textarea:focus,select:focus{outline:none;border-color:var(--tosca)}
-textarea{resize:none;height:60px}
-.btn{padding:12px 16px;border-radius:8px;border:none;background:var(--tosca);color:#fff;font-weight:600;width:100%;cursor:pointer}
-.btn-secondary{background:var(--gray-200);color:var(--gray-700)}
-
+.modal-content{background:var(--hitam2);width:100%;max-width:420px;border-radius:16px;padding:16px;border:1px solid var(--gold);max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;padding-bottom:10px;margin-bottom:12px}
+.modal-header h3{font-size:16px;color:var(--gold)}
+.close-btn{background:none;border:none;font-size:24px;color:var(--abu);cursor:pointer}
+.form-group{margin-bottom:10px}
+.form-group label{display:block;font-size:11px;font-weight:600;margin-bottom:3px;color:var(--putih)}
+.form-group label span{color:red}
+.form-group input,.form-group textarea{width:100%;padding:10px;border:1px solid #444;border-radius:6px;font-size:12px;background:#222;color:var(--putih)}
+.btn-wa{width:100%;padding:12px;background:var(--hijau);color:var(--putih);border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--hitam2);display:flex;justify-content:space-around;padding:8px 0;border-top:2px solid var(--gold);z-index:1000}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--abu);font-size:10px;cursor:pointer}
+.nav-item.active{color:var(--gold)}
+.nav-item i{font-size:20px}
 .page{display:none}
 .page.active{display:block}
-.card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
-.badge{padding:4px 10px;border-radius:12px;font-size:12px;background:var(--tosca-light);color:var(--tosca-dark);font-weight:600}
-.hidden{display:none}
+.notif{position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--hitam);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:700;z-index:3000;display:none}
+.notif.active{display:block}
 </style>
 </head>
 <body>
 
-<!-- HEADER FIXED -->
+<div class="notif" id="notif">Data tersimpan otomatis ✅</div>
 <div class="header">
-  <div class="header-top">
-    <div>
-      <div class="header-title">Kurir Supra</div>
-      <div class="header-desc">Kurir Aman, Nyaman, Dan Amanah</div>
+  <h1>GPS PASER   ===🛵</h1>
+  
+  <div class="header-date"><div id="hari">Minggu</div><div id="tanggal">27 Sep 2026</div></div>
+</div>
+<div class="marquee"><span>🔥 Info Admin hub: 0831-3752-7300 || Operasional jam 08:00-17:00 WITA || Istirahat : Waktu Sholat || Tarif sewaktu-waktu dapat berubah ||💸Pembayaran COD-Tranfer Dana & ShopeePay🔥</span></div>
+
+<div class="page active" id="pageHome">
+  <div class="container">
+    <div class="section-title">Pilih Layanan </div>
+    <div class="layanan-grid">
+      <div class="layanan-card" onclick="openModal('BELIKAN')"><i class="fi fi-sr-shopping-bag"></i><span>BELIKAN</span></div>
+      <div class="layanan-card" onclick="openModal('ANTARKAN')"><i class="fi fi-sr-truck-side"></i><span>ANTARKAN</span></div>
+      <div class="layanan-card" onclick="openModal('AMBILKAN')"><i class="fi fi-sr-box-open"></i><span>AMBILKAN</span></div>
+      <div class="layanan-card" onclick="openModal('OJEK')"><i class="fi fi-sr-motorcycle"></i><span>OJEK</span></div>
     </div>
-    <div id="statusText">
-      <span class="status-badge status-offline">Offline</span>
+
+    <div class="section-title" style="margin-top:20px;"> Tarif Ongkir</div>
+    <div class="tarif-info-grid">
+      <div class="tarif-info-card"><div class="tarif-info-km">0-2km</div><div>Rp10.000</div></div>
+      <div class="tarif-info-card"><div class="tarif-info-km">3km</div><div>Rp15.000</div></div>
+      <div class="tarif-info-card"><div class="tarif-info-km">4km</div><div>Rp20.000</div></div>
+      <div class="tarif-info-card"><div class="tarif-info-km">5km</div><div>Rp25.000</div></div>
+      <div class="tarif-info-card"><div class="tarif-info-km">6km</div><div>Rp30.000</div></div>
+      <div class="tarif-info-card"><div class="tarif-info-km">7km</div><div>Rp.35.000</div></div>
     </div>
+    <div class="tarif-info-note">* Maximal barang bawaan 15kg,tambah tempat harga up & kesepakatan dengan admin</div>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="content">
-
-  <!-- PAGE HOME -->
-  <div class="page active" id="page-home">
-    <div class="banner">
-      <img src="https://drive.google.com/thumbnail?id=1t3TRBJthZ_9cFutnnKtRiYG_tJ5REdib&sz=w1000" class="banner-slide active">
-      <img src="https://drive.google.com/thumbnail?id=1mj6eeAfv9a_nhLBzzJYs64BgTCJN2-eC&sz=w1000" class="banner-slide">
-      <div class="banner-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-
-    <!-- GRID JADWAL SHOLAT MANUAL -->
-    <div class="sholat-title">🕌 Jadwal Sholat Kab.Paser</div>
-    <div class="sholat-grid">
-      <div class="sholat-item">
-        <div class="sholat-nama">Subuh</div>
-        <div class="sholat-jam">04:50</div>
-      </div>
-      <div class="sholat-item">
-        <div class="sholat-nama">Dzuhur</div>
-        <div class="sholat-jam">12:13</div>
-      </div>
-      <div class="sholat-item">
-        <div class="sholat-nama">Asar</div>
-        <div class="sholat-jam">15:38</div>
-      </div>
-      <div class="sholat-item">
-        <div class="sholat-nama">Magrib</div>
-        <div class="sholat-jam">18:14</div>
-      </div>
-      <div class="sholat-item">
-        <div class="sholat-nama">Isya</div>
-        <div class="sholat-jam">19:28</div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="grid-item" onclick="openModal('modal-belikan')"><div class="grid-icon">🛍️</div><p>Belikan</p></div>
-      <div class="grid-item" onclick="openModal('modal-ambil')"><div class="grid-icon">📦</div><p>Ambilkan Pesanan</p></div>
-      <div class="grid-item" onclick="openModal('modal-antar')"><div class="grid-icon">🚚</div><p>Antarkan</p></div>
-      <div class="grid-item" onclick="openModal('modal-ojek')"><div class="grid-icon">🏍️</div><p>Ojek</p></div>
-      <div class="grid-item" onclick="openModal('modal-belanja')"><div class="grid-icon">🛒</div><p>Belanjaan</p></div>
-      <div class="grid-item" onclick="openModal('modal-undangan')"><div class="grid-icon">💌</div><p>Undangan Digital</p></div>
-    </div>
-  </div>
-
-  <!-- PAGE NOTA -->
-  <div class="page" id="page-nota">
-    <h3 style="margin-bottom:12px">Nota Digital</h3>
-    <div class="form-group">
-      <label>No WA Pelanggan</label>
-      <input type="tel" class="input" id="notaWA" placeholder="08xxxxxxxxxx" value="08">
-    </div>
-    <div id="notaItems"></div>
-    <button class="btn btn-secondary" onclick="tambahItemNota()">+ Tambah Barang</button>
-    <div style="margin:16px 0">
-      <div class="form-group">
-        <label>Ongkir</label>
-        <input type="number" class="input" id="notaOngkir" value="10000" oninput="hitungTotalNota()">
-      </div>
-      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:18px;margin-top:12px;padding:12px;background:var(--tosca-light);border-radius:8px">
-        <span>Total:</span>
-        <span id="notaTotal">Rp0</span>
-      </div>
-    </div>
-    <button class="btn" onclick="kirimNotaWA()">Kirim Nota ke WA Pelanggan</button>
-  </div>
-
-  <!-- PAGE RIWAYAT -->
-  <div class="page" id="page-riwayat">
-    <h3 style="margin-bottom:12px">Riwayat Order</h3>
-    <div id="riwayatList"></div>
-  </div>
-
-  <!-- PAGE AKUN -->
-  <div class="page" id="page-akun">
-    <h3 style="margin-bottom:12px">Data Akun</h3>
-    <div class="card">
-      <div class="form-group"><label>Nama</label><input type="text" class="input" id="akunNama" oninput="saveAkun()"></div>
-      <div class="form-group"><label>Alamat</label><textarea class="input" id="akunAlamat" oninput="saveAkun()"></textarea></div>
-      <div class="form-group"><label>No WhatsApp</label><input type="tel" class="input" id="akunWA" oninput="saveAkun()"></div>
-      <span class="badge">Auto Save ke Browser</span>
-    </div>
+<div class="page" id="pageAkun">
+  <div class="container">
+    <div class="section-title">Data Akun Tersimpan</div>
+    <div class="form-group"><label>Nama</label><input type="text" id="akunNama" oninput="saveData()"></div>
+    <div class="form-group"><label>WA</label><input type="tel" id="akunWA" oninput="saveData()"></div>
+    <div class="form-group"><label>Alamat</label><textarea id="akunAlamat" rows="3" oninput="saveData()"></textarea></div>
   </div>
 </div>
 
-<!-- FOOTER NAV -->
-<div class="footer">
-  <div class="nav-item active" onclick="showPage('home')"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>Home</div>
-  <div class="nav-item" onclick="showPage('riwayat')"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4zM3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>Riwayat</div>
-  <div class="nav-item" onclick="showPage('nota')"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9zM4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5z"/></svg>Nota</div>
-  <div class="nav-item" onclick="showPage('akun')"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/></svg>Akun</div>
-</div>
-
-<!-- MODAL UNDANGAN DIGITAL DENGAN FORM DINAMIS -->
-<div class="modal" id="modal-undangan">
+<div class="modal" id="modalForm">
   <div class="modal-content">
-    <h3>Buat Undangan Digital</h3>
-
-    <div class="form-group">
-      <label>Jenis Undangan</label>
-      <select class="input" id="jenisUndangan" onchange="gantiFormUndangan()">
-        <option value="pernikahan">Undangan Pernikahan</option>
-        <option value="tasmiah">Undangan Tasmiah</option>
-        <option value="haji">Undangan Haji dan Umroh</option>
-        <option value="ultah">Undangan Ulang Tahun</option>
-        <option value="khitan">Undangan Syukuran Khitanan</option>
-        <option value="maulid">Undangan Maulid Nabi</option>
-        <option value="isra">Undangan Isra' Mi'raj</option>
-        <option value="haul">Undangan Haul/Tahlil</option>
-      </select>
+    <div class="modal-header">
+      <h3 id="modalTitle">Order Layanan</h3>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
-
-    <!-- FORM PERNIKAHAN -->
-    <div id="form-pernikahan" class="form-undangan">
-      <div class="form-group"><label>Nama Mempelai Pria</label><input type="text" class="input" id="namaPria" placeholder="Contoh: Ahmad"></div>
-      <div class="form-group"><label>Nama Mempelai Wanita</label><input type="text" class="input" id="namaWanita" placeholder="Contoh: Siti"></div>
-      <div class="form-group"><label>Nama Orang Tua Pria</label><input type="text" class="input" id="ortuPria" placeholder="Bpk. & Ibu."></div>
-      <div class="form-group"><label>Nama Orang Tua Wanita</label><input type="text" class="input" id="ortuWanita" placeholder="Bpk. & Ibu."></div>
-    </div>
-
-    <!-- FORM TASMIAH -->
-    <div id="form-tasmiah" class="form-undangan hidden">
-      <div class="form-group"><label>Nama Bayi</label><input type="text" class="input" id="namaBayi" placeholder="Contoh: Muhammad Ali"></div>
-      <div class="form-group"><label>Nama Orang Tua</label><input type="text" class="input" id="ortuBayi" placeholder="Bpk. & Ibu."></div>
-      <div class="form-group"><label>Jenis Kelamin</label>
-        <select class="input" id="jkBayi"><option value="Putra">Putra</option><option value="Putri">Putri</option></select>
-      </div>
-    </div>
-
-    <!-- FORM HAJI UMROH -->
-    <div id="form-haji" class="form-undangan hidden">
-      <div class="form-group"><label>Nama Jamaah</label><input type="text" class="input" id="namaJamaah" placeholder="Contoh: H. Ahmad"></div>
-      <div class="form-group"><label>Tujuan</label>
-        <select class="input" id="tujuanHaji"><option value="Haji">Ibadah Haji</option><option value="Umroh">Umroh</option></select>
-      </div>
-    </div>
-
-    <!-- FORM ULANG TAHUN -->
-    <div id="form-ultah" class="form-undangan hidden">
-      <div class="form-group"><label>Nama</label><input type="text" class="input" id="namaUltah" placeholder="Contoh: Dinda"></div>
-      <div class="form-group"><label>Usia ke</label><input type="number" class="input" id="usiaUltah" placeholder="Contoh: 17"></div>
-    </div>
-
-    <!-- FORM KHITAN -->
-    <div id="form-khitan" class="form-undangan hidden">
-      <div class="form-group"><label>Nama Anak</label><input type="text" class="input" id="namaKhitan" placeholder="Contoh: Rizki"></div>
-      <div class="form-group"><label>Nama Orang Tua</label><input type="text" class="input" id="ortuKhitan" placeholder="Bpk. & Ibu."></div>
-    </div>
-
-    <!-- FORM MAULID -->
-    <div id="form-maulid" class="form-undangan hidden">
-      <div class="form-group"><label>Tema Acara</label><input type="text" class="input" id="temaMaulid" placeholder="Contoh: Meneladani Akhlak Rasulullah"></div>
-      <div class="form-group"><label>Penceramah</label><input type="text" class="input" id="penceramahMaulid" placeholder="Ustadz/Dr."></div>
-    </div>
-
-    <!-- FORM ISRA MI'RAJ -->
-    <div id="form-isra" class="form-undangan hidden">
-      <div class="form-group"><label>Tema Acara</label><input type="text" class="input" id="temaIsra" placeholder="Contoh: Hikmah Isra Mi'raj"></div>
-      <div class="form-group"><label>Penceramah</label><input type="text" class="input" id="penceramahIsra" placeholder="Ustadz/Dr."></div>
-    </div>
-
-    <!-- FORM HAUL -->
-    <div id="form-haul" class="form-undangan hidden">
-      <div class="form-group"><label>Nama Almarhum/Almarhumah</label><input type="text" class="input" id="namaAlmarhum" placeholder="Contoh: H. Ahmad bin Sulaiman"></div>
-      <div class="form-group"><label>Haul ke</label><input type="number" class="input" id="haulKe" placeholder="Contoh: 1"></div>
-    </div>
-
-    <!-- FORM UMUM UNTUK SEMUA JENIS -->
-    <div class="form-group"><label>Tanggal Acara</label><input type="date" class="input" id="tanggalUndangan"></div>
-    <div class="form-group"><label>Jam Acara</label><input type="time" class="input" id="jamUndangan"></div>
-    <div class="form-group"><label>Tempat Acara</label><textarea class="input" id="tempatUndangan" placeholder="Alamat lengkap"></textarea></div>
-    <div class="form-group"><label>No WA Teman</label><input type="tel" class="input" id="waTeman" placeholder="08xxxxxxxxxx"></div>
-    <div class="form-group"><label>Ucapan Tambahan</label><textarea class="input" id="ucapanUndangan" placeholder="Opsional"></textarea></div>
-
-    <button class="btn" onclick="kirimUndanganWA()">Kirim Undangan via WhatsApp</button>
-    <button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal()">Batal</button>
+    
+    <div class="form-group"><label>Nama Lengkap <span>*</span></label><input type="text" id="coNama" oninput="saveData()"></div>
+    <div class="form-group"><label>No.WA <span>*</span></label><input type="tel" id="coWA" oninput="saveData()"></div>
+    <div class="form-group"><label>Alamat <span>*</span></label><textarea id="coAlamat" rows="2" oninput="saveData()"></textarea></div>
+    <div id="formDinamis"></div>
+    <button class="btn-wa" onclick="kirimWA()"><i class="fi fi-brands-whatsapp"></i> Kirim ke Admin</button>
   </div>
 </div>
 
-<!-- MODAL LAINNYA TETAP -->
-<div class="modal" id="modal-belikan"><div class="modal-content"><h3>Beli Barang</h3><div class="form-group"><label>Beli Apa?</label><input type="text" class="input" id="beliApa"></div><div class="form-group"><label>Beli Dimana?</label><input type="text" class="input" id="beliDimana"></div><div class="form-group"><label>Catatan</label><textarea class="input" id="beliCatatan"></textarea></div><button class="btn" onclick="kirimOrder('Belikan')">Kirim Order</button><button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal()">Batal</button></div></div>
-<div class="modal" id="modal-ambil"><div class="modal-content"><h3>Ambil Pesanan</h3><div class="form-group"><label>Ambil Dimana?</label><input type="text" class="input" id="ambilDimana"></div><div class="form-group"><label>Keterangan</label><input type="text" class="input" id="ambilKeterangan"></div><div class="form-group"><label>WA Penjual</label><input type="tel" class="input" id="ambilWA"></div><button class="btn" onclick="kirimOrder('Ambil Pesanan')">Kirim Order</button><button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal()">Batal</button></div></div>
-<div class="modal" id="modal-antar"><div class="modal-content"><h3>Antar Barang</h3><div class="form-group"><label>Nama Penerima</label><input type="text" class="input" id="antarNama"></div><div class="form-group"><label>Alamat</label><textarea class="input" id="antarAlamat"></textarea></div><div class="form-group"><label>WA Penerima</label><input type="tel" class="input" id="antarWA"></div><div class="form-group"><label>Keterangan</label><input type="text" class="input" id="antarKeterangan"></div><button class="btn" onclick="kirimOrder('Antar Barang')">Kirim Order</button><button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal()">Batal</button></div></div>
-<div class="modal" id="modal-ojek"><div class="modal-content"><h3>Ojek Online</h3><div class="form-group"><label>Jemput Dimana?</label><input type="text" class="input" id="ojekJemput"></div><div class="form-group"><label>Tujuan</label><input type="text" class="input" id="ojekTujuan"></div><div class="form-group"><label>WA Order</label><input type="tel" class="input" id="ojekWA"></div><button class="btn" onclick="kirimOrder('Ojek')">Kirim Order</button><button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal()">Batal</button></div></div>
-<div class="modal" id="modal-belanja"><div class="modal-content"><h3>Belanjaan</h3><div class="form-group"><label>Beli Dimana?</label><input type="text" class="input" id="belanjaDimana"></div><div id="belanjaList"></div><button class="btn btn-secondary" onclick="tambahBelanja()">+ Tambah Item</button><button class="btn" style="margin-top:12px" onclick="kirimOrder('Belanjaan')">Kirim Order</button><button class="btn btn-secondary" style="margin-top:8px" onclick="closeModal()">Batal</button></div></div>
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="switchPage('Home')"><i class="fi fi-sr-home"></i><span>Home</span></div>
+  <div class="nav-item" onclick="switchPage('Akun')"><i class="fi fi-sr-user"></i><span>Akun</span></div>
+</div>
 
 <script>
-const NO_WA = "6283137527300";
-let riwayat = JSON.parse(localStorage.getItem('kurir_riwayat')) || [];
-let akun = JSON.parse(localStorage.getItem('kurir_akun')) || {nama:'',alamat:'',wa:''};
+const NO_WA_ADMIN = "083137527300";
+let layananAktif = '';
+let saveTimer;
 
-// INIT
-loadAkun();
-renderRiwayat();
-renderNota();
-cekJamOperasional();
-setInterval(cekJamOperasional, 60000);
-slideBanner();
-gantiFormUndangan();
+init();
+function init(){ updateTanggal(); loadData(); }
 
-// CEK APAKAH ONLINE - PAKAI JAM WITA UTC+8 JAM 08:00-17:00
-function isOnline(){
+function updateTanggal(){
   const now = new Date();
-  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-  const wita = new Date(utc + (3600000 * 8));
-  const hour = wita.getHours();
-  return hour >= 8 && hour < 17;
+  document.getElementById('hari').innerText = new Intl.DateTimeFormat("id-ID", {weekday:"long",timeZone:"Asia/Makassar"}).format(now);
+  document.getElementById('tanggal').innerText = new Intl.DateTimeFormat("id-ID", {day:"2-digit",month:"2-digit",year:"numeric",timeZone:"Asia/Makassar"}).format(now);
 }
 
-// STATUS ONLINE/OFFLINE - TAMPILKAN JAM WITA
-function cekJamOperasional(){
-  const now = new Date();
-  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-  const wita = new Date(utc + (3600000 * 8));
-  const hour = wita.getHours();
-  const menit = wita.getMinutes();
-  const statusText = document.getElementById('statusText');
-
-  if(hour >= 8 && hour < 17){
-    statusText.innerHTML = `<span class="status-badge status-online">Online - ${hour}:${menit.toString().padStart(2,'0')} WITA</span>`;
-  }else{
-    statusText.innerHTML = `<span class="status-badge status-offline">Offline - ${hour}:${menit.toString().padStart(2,'0')} WITA</span>`;
-  }
+// AUTO SAVE KE BROWSER
+function saveData(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    const data = {nama:document.getElementById('coNama').value,wa:document.getElementById('coWA').value,alamat:document.getElementById('coAlamat').value};
+    localStorage.setItem('kurirpaser',JSON.stringify(data));
+    ['akunNama','akunWA','akunAlamat'].forEach(id=>{document.getElementById(id).value=data[id.replace('akun','').toLowerCase()];});
+    document.getElementById('notif').classList.add('active');
+    setTimeout(()=>document.getElementById('notif').classList.remove('active'),1500);
+  },800);
+}
+// AUTO LOAD DARI BROWSER
+function loadData(){
+  const d = JSON.parse(localStorage.getItem('kurirpaser')||'{}');
+  ['coNama','coWA','coAlamat','akunNama','akunWA','akunAlamat'].forEach(id=>{
+    document.getElementById(id).value = d[id.replace('co','').replace('akun','') ]||'';
+  });
 }
 
-// BANNER SLIDE
-let currentSlide = 0;
-function slideBanner(){
-  const slides = document.querySelectorAll('.banner-slide');
-  const dots = document.querySelectorAll('.dot');
-  setInterval(()=>{
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-  }, 3000);
+function openModal(jenis){
+  layananAktif = jenis;
+  document.getElementById('modalTitle').innerText = `Order ${jenis}`;
+  let html = '';
+  if(jenis=='BELIKAN'){ html = `<div class="form-group"><label>Beli di: Toko & Alamat</label><input type="text" id="beliDi"></div><div class="form-group"><label>Keterangan Barang</label><textarea id="beliKet" rows="2"></textarea></div>`; }
+  if(jenis=='ANTARKAN'){ html = `<div class="form-group"><label>Alamat Antar</label><input type="text" id="antarAlamat"></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="antarNama"></div><div class="form-group"><label>No.WA Penerima</label><input type="tel" id="antarWA"></div>`; }
+  if(jenis=='AMBILKAN'){ html = `<div class="form-group"><label>Ambil di: Alamat</label><input type="text" id="ambilDi"></div><div class="form-group"><label>Keterangan</label><textarea id="ambilKet" rows="2"></textarea></div><div class="form-group"><label>Note: WA Toko</label><input type="tel" id="ambilWA"></div>`; }
+  if(jenis=='OJEK'){ html = `<div class="form-group"><label>Jemput di:</label><input type="text" id="ojekJemput"></div><div class="form-group"><label>Tujuan Ke:</label><input type="text" id="ojekTujuan"></div><div class="form-group"><label>Note: </label><input type="text" id="ojekHub"></div>`; }
+  document.getElementById('formDinamis').innerHTML = html;
+  document.getElementById('modalForm').classList.add('active');
+  document.body.style.overflow='hidden';
 }
+function closeModal(){ document.getElementById('modalForm').classList.remove('active'); document.body.style.overflow='auto'; }
 
-// NAVIGASI
-function showPage(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  event.target.closest('.nav-item').classList.add('active');
-  if(page=='nota') hitungTotalNota();
-}
-
-// MODAL
-function openModal(id){
-  document.getElementById(id).classList.add('active');
-}
-function closeModal(){
-  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active'));
-}
-
-// GANTI FORM UNDANGAN SESUAI JENIS
-function gantiFormUndangan(){
-  const jenis = document.getElementById('jenisUndangan').value;
-  document.querySelectorAll('.form-undangan').forEach(f=>f.classList.add('hidden'));
-  document.getElementById('form-'+jenis).classList.remove('hidden');
-}
-
-// KIRIM ORDER KE WA KURIR - HANYA 1 FUNGSI DENGAN CEK ONLINE
-function kirimOrder(jenis){
-  if(!isOnline()){
-    alert('Maaf, saat ini Kurir Supra sedang Offline. Jam operasional 08:00-17:00 WITA');
+function kirimWA(){
+  const nama = document.getElementById('coNama').value.trim();
+  const wa = document.getElementById('coWA').value.trim();
+  const alamat = document.getElementById('coAlamat').value.trim();
+  
+  if(!nama || !wa || !alamat){
+    alert('Isi Nama, WA, Alamat wajib');
     return;
   }
-
-  let pesan = `*Order Kurir Supra*%0A`;
-  pesan += `Jenis: ${jenis}%0A%0A`;
-
-  if(jenis=='Belikan'){
-    pesan += `Beli Apa: ${document.getElementById('beliApa').value}%0A`;
-    pesan += `Beli Dimana: ${document.getElementById('beliDimana').value}%0A`;
-    pesan += `Catatan: ${document.getElementById('beliCatatan').value}`;
+  
+  const tgl = new Intl.DateTimeFormat("id-ID", {day:"2-digit",month:"2-digit",year:"numeric",timeZone:"Asia/Makassar"}).format(new Date());
+  const hari = new Intl.DateTimeFormat("id-ID", {weekday:"long",timeZone:"Asia/Makassar"}).format(new Date());
+  
+  // Menggunakan emoji standar WhatsApp agar dipastikan terbaca di semua device
+  let pesan = `*ORDER BARU ${hari.toUpperCase()}, ${tgl}*\n\n` +
+              `👤 *DATA PELANGGAN:*\n` +
+              `==================\n` +
+              `Nama : ${nama}\n` +
+              `No.wa : ${wa}\n` +
+              `Alamat : ${alamat}\n\n` +
+              `🛵 *LAYANAN : ${layananAktif}*\n` +
+              `==================\n`;
+  
+  if(layananAktif=='BELIKAN'){ 
+    pesan += `📍 Beli di: ${document.getElementById('beliDi').value || '-'}\n▪️ Keterangan: ${document.getElementById('beliKet').value || '-'}\n`; 
   }
-  if(jenis=='Ambil Pesanan'){
-    pesan += `Ambil Dimana: ${document.getElementById('ambilDimana').value}%0A`;
-    pesan += `Keterangan: ${document.getElementById('ambilKeterangan').value}%0A`;
-    pesan += `WA Penjual: ${document.getElementById('ambilWA').value}`;
+  if(layananAktif=='ANTARKAN'){ 
+    pesan += `📍 Alamat antar: ${document.getElementById('antarAlamat').value || '-'}\n▪️ Nama Penerima: ${document.getElementById('antarNama').value || '-'}\n▪️ No.wa: ${document.getElementById('antarWA').value || '-'}\n`; 
   }
-  if(jenis=='Antar Barang'){
-    pesan += `Nama Penerima: ${document.getElementById('antarNama').value}%0A`;
-    pesan += `Alamat: ${document.getElementById('antarAlamat').value}%0A`;
-    pesan += `WA Penerima: ${document.getElementById('antarWA').value}%0A`;
-    pesan += `Keterangan: ${document.getElementById('antarKeterangan').value}`;
+  if(layananAktif=='AMBILKAN'){ 
+    pesan += `📍 Ambil di: ${document.getElementById('ambilDi').value || '-'}\n▪️ Keterangan: ${document.getElementById('ambilKet').value || '-'}\n▪️ Note: wa tokonya: ${document.getElementById('ambilWA').value || '-'}\n`; 
   }
-  if(jenis=='Ojek'){
-    pesan += `Jemput: ${document.getElementById('ojekJemput').value}%0A`;
-    pesan += `Tujuan: ${document.getElementById('ojekTujuan').value}%0A`;
-    pesan += `WA Order: ${document.getElementById('ojekWA').value}`;
+  if(layananAktif=='OJEK'){ 
+    pesan += `📍 Jemput di: ${document.getElementById('ojekJemput').value || '-'}\n▪️ Tujuan Ke: ${document.getElementById('ojekTujuan').value || '-'}\n▪️ Note: ${document.getElementById('ojekHub').value || '-'}\n`; 
   }
-  if(jenis=='Belanjaan'){
-    pesan += `Beli Dimana: ${document.getElementById('belanjaDimana').value}%0A`;
-    pesan += `List Belanjaan:%0A`;
-    for(let i=1;i<=10;i++){
-      const el = document.getElementById('belanja'+i);
-      if(el && el.value) pesan += `${i}. ${el.value}%0A`;
-    }
-  }
-
-  riwayat.unshift({
-    id:Date.now(),
-    jenis,
-    detail:pesan.replace(/\*|\%0A/g,' '),
-    tanggal:new Date().toLocaleString('id-ID')
-  });
-  localStorage.setItem('kurir_riwayat',JSON.stringify(riwayat));
-  renderRiwayat();
-
-  window.open(`https://wa.me/${NO_WA}?text=${pesan}`,'_blank');
-  alert('Order terkirim ke WhatsApp Kurir!');
+  
+  pesan += `\nMohon segera diproses ya kak 🙏`;
+  
+  // Memastikan format nomor HP Admin benar (menghilangkan angka 0 di depan dan diganti 62)
+  const formattedAdminWA = NO_WA_ADMIN.startsWith('0') ? '62' + NO_WA_ADMIN.substring(1) : NO_WA_ADMIN;
+  
+  // Buka link WhatsApp dengan pesan yang sudah di-encode sempurna
+  const urlUrl = `https://api.whatsapp.com/send?phone=${formattedAdminWA}&text=${encodeURIComponent(pesan)}`;
+  
+  window.open(urlUrl, '_blank');
   closeModal();
 }
-
-// KIRIM UNDANGAN DIGITAL - DENGAN CEK ONLINE
-function kirimUndanganWA(){
-  if(!isOnline()){
-    alert('Maaf, fitur kirim undangan hanya aktif jam 08:00-17:00 WITA');
-    return;
-  }
-
-  const jenis = document.getElementById('jenisUndangan').value;
-  const tanggal = document.getElementById('tanggalUndangan').value;
-  const jam = document.getElementById('jamUndangan').value;
-  const tempat = document.getElementById('tempatUndangan').value;
-  const waTeman = document.getElementById('waTeman').value.replace(/[^0-9]/g,'');
-  const ucapan = document.getElementById('ucapanUndangan').value;
-
-  if(!tanggal ||!jam ||!tempat ||!waTeman){
-    alert('Lengkapi tanggal, jam, tempat, dan no WA!');
-    return;
-  }
-
-  const tanggalFormat = new Date(tanggal).toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-  let isiUndangan = '';
-  let judul = '';
-
-  if(jenis=='pernikahan'){
-    const pria = document.getElementById('namaPria').value;
-    const wanita = document.getElementById('namaWanita').value;
-    const ortuPria = document.getElementById('ortuPria').value;
-    const ortuWanita = document.getElementById('ortuWanita').value;
-    judul = '💍 UNDANGAN PERNIKAHAN 💍';
-    isiUndangan = `Assalamu'alaikum Warahmatullahi Wabarakatuh\n`;
-    isiUndangan += `Dengan memohon rahmat dan ridho Allah SWT\n`;
-    isiUndangan += `Kami bermaksud mengundang Bapak/Ibu/Saudara/i\n`;
-    isiUndangan += `untuk menghadiri acara pernikahan putra-putri kami:\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `*${pria}*\n`;
-    isiUndangan += `Putra dari ${ortuPria}\n\n`;
-    isiUndangan += `DENGAN\n`;
-    isiUndangan += `*${wanita}*\n`;
-    isiUndangan += `Putri dari ${ortuWanita}\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  if(jenis=='tasmiah'){
-    const namaBayi = document.getElementById('namaBayi').value;
-    const ortuBayi = document.getElementById('ortuBayi').value;
-    const jk = document.getElementById('jkBayi').value;
-    judul = '👶 UNDANGAN TASMIAH & AQIQAH 👶';
-    isiUndangan = `Alhamdulillah\n`;
-    isiUndangan += `Dengan penuh syukur kami mengundang Bapak/Ibu/Saudara/i\n`;
-    isiUndangan += `untuk hadir pada acara tasmiah & aqiqah putra/putri kami:\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `*${namaBayi}*\n`;
-    isiUndangan += `${jk} dari ${ortuBayi}\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  if(jenis=='haji'){
-    const namaJamaah = document.getElementById('namaJamaah').value;
-    const tujuan = document.getElementById('tujuanHaji').value;
-    judul = `🕋 UNDANGAN PELEPASAN ${tujuan.toUpperCase()} 🕋`;
-    isiUndangan = `Alhamdulillah\n`;
-    isiUndangan += `Dengan mengharap ridho Allah SWT\n`;
-    isiUndangan += `Kami sekeluarga mengundang Bapak/Ibu/Saudara/i\n`;
-    isiUndangan += `untuk menghadiri acara pelepasan keberangkatan ${tujuan}:\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `*${namaJamaah}*\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  if(jenis=='ultah'){
-    const nama = document.getElementById('namaUltah').value;
-    const usia = document.getElementById('usiaUltah').value;
-    judul = `🎉 UNDANGAN ULANG TAHUN 🎉`;
-    isiUndangan = `Yuk hadir dan rayakan ulang tahun:\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `*${nama}*\n`;
-    isiUndangan += `yang ke-${usia} tahun\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  if(jenis=='khitan'){
-    const namaAnak = document.getElementById('namaKhitan').value;
-    const ortu = document.getElementById('ortuKhitan').value;
-    judul = '✂️ UNDANGAN SYUKURAN KHITAN ✂️';
-    isiUndangan = `Dengan memanjatkan puji syukur kehadirat Allah SWT\n`;
-    isiUndangan += `Kami mengundang Bapak/Ibu/Saudara/i\n`;
-    isiUndangan += `untuk hadir pada acara syukuran khitanan putra kami:\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `*${namaAnak}*\n`;
-    isiUndangan += `Putra dari ${ortu}\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  if(jenis=='maulid'){
-    const tema = document.getElementById('temaMaulid').value;
-    const penceramah = document.getElementById('penceramahMaulid').value;
-    judul = '📿 UNDANGAN MAULID NABI MUHAMMAD SAW 📿';
-    isiUndangan = `Mari hadir bersama dalam acara:\n\n`;
-    isiUndangan += `*Peringatan Maulid Nabi Muhammad SAW*\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `Tema: ${tema}\n`;
-    isiUndangan += `Penceramah: ${penceramah}\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  if(jenis=='isra'){
-    const tema = document.getElementById('temaIsra').value;
-    const penceramah = document.getElementById('penceramahIsra').value;
-    judul = "🌙 UNDANGAN ISRA' MI'RAJ 🌙";
-    isiUndangan = `Dalam rangka memperingati:\n\n`;
-    isiUndangan += `*Isra' Mi'raj Nabi Muhammad SAW*\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `Tema: ${tema}\n`;
-    isiUndangan += `Penceramah: ${penceramah}\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  if(jenis=='haul'){
-    const nama = document.getElementById('namaAlmarhum').value;
-    const haulKe = document.getElementById('haulKe').value;
-    judul = '🤲 UNDANGAN HAUL & TAHLIL 🤲';
-    isiUndangan = `Dengan memohon doa restu\n`;
-    isiUndangan += `Kami mengundang Bapak/Ibu/Saudara/i\n`;
-    isiUndangan += `untuk hadir pada acara haul ke-${haulKe}:\n\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n`;
-    isiUndangan += `*Alm/Almh. ${nama}*\n`;
-    isiUndangan += `━━━━━━━━━━━━━━━\n\n`;
-  }
-
-  // BAGIAN WAKTU & TEMPAT - FORMAT RAPI
-  isiUndangan += `📅 Hari/Tanggal : ${tanggalFormat}\n`;
-  isiUndangan += `⏰ Waktu        : ${jam} WITA\n`;
-  isiUndangan += `📍 Tempat       : ${tempat}\n\n`;
-
-  if(ucapan) isiUndangan += `${ucapan}\n\n`;
-
-  isiUndangan += `Merupakan suatu kehormatan & kebahagiaan\n`;
-  isiUndangan += `bagi kami apabila Bapak/Ibu/Saudara/i\n`;
-  isiUndangan += `berkenan hadir untuk memberikan doa restu.\n\n`;
-  isiUndangan += `Atas kehadirannya kami ucapkan terima kasih.\n\n`;
-  isiUndangan += `Wassalamu'alaikum Warahmatullahi Wabarakatuh 🙏`;
-
- // GABUNG JUDUL + ISI LALU ENCODE
-  const pesanLengkap = `${judul}\n\n${isiUndangan}`;
-  const pesanEncode = encodeURIComponent(pesanLengkap);
-
-  let waFormat = waTeman;
-  if(waFormat.startsWith('0')) waFormat = '62' + waFormat.substring(1);
-
-  window.open(`https://wa.me/${waFormat}?text=${pesanEncode}`,'_blank');
-  alert('Undangan terkirim ke WhatsApp teman!');
-  closeModal();
-}
-
-let itemCounter = 5;
-function renderNota(){
-  const html = [];
-  for(let i=1;i<=5;i++){
-    html.push(`<div class="item-row"><input type="text" class="input" placeholder="Nama Barang" id="notaNama${i}"><input type="number" class="input" placeholder="Harga" id="notaHarga${i}" oninput="hitungTotalNota()"><input type="number" class="input" placeholder="Qty" id="notaQty${i}" value="1" oninput="hitungTotalNota()"></div>`);
-  }
-  document.getElementById('notaItems').innerHTML = html.join('');
-  hitungTotalNota();
-}
-
-function tambahItemNota(){
-  itemCounter++;
-  const div = document.createElement('div');
-  div.className='item-row';
-  div.innerHTML=`<input type="text" class="input" placeholder="Nama Barang" id="notaNama${itemCounter}"><input type="number" class="input" placeholder="Harga" id="notaHarga${itemCounter}" oninput="hitungTotalNota()"><input type="number" class="input" placeholder="Qty" id="notaQty${itemCounter}" value="1" oninput="hitungTotalNota()"><button onclick="this.parentElement.remove();hitungTotalNota()" style="background:var(--danger);color:#fff;border:none;border-radius:6px;padding:0 10px;height:40px">x</button>`;
-  document.getElementById('notaItems').appendChild(div);
-}
-
-function hitungTotalNota(){
-  let total = 0;
-  document.querySelectorAll('.item-row').forEach(row=>{
-    const hargaEl = row.querySelector('input:nth-child(2)');
-    const qtyEl = row.querySelector('input:nth-child(3)');
-    const harga = parseInt(hargaEl.value) || 0;
-    const qty = parseInt(qtyEl.value) || 0;
-    total += harga * qty;
-  });
-  const ongkir = parseInt(document.getElementById('notaOngkir').value) || 0;
-  document.getElementById('notaTotal').innerText = 'Rp'+(total+ongkir).toLocaleString('id-ID');
-}
-
-function kirimNotaWA(){
-  const waPelanggan = document.getElementById('notaWA').value.replace(/[^0-9]/g,'');
-  if(!waPelanggan || waPelanggan.length < 10){
-    alert('Isi No WA Pelanggan dengan benar!');
-    return;
-  }
-
-  let pesan = `*NOTA DIGITAL KURIR SUPRA*%0A%0A`;
-  let total = 0;
-  let no = 1;
-  document.querySelectorAll('.item-row').forEach(row=>{
-    const nama = row.querySelector('input:nth-child(1)').value;
-    const harga = parseInt(row.querySelector('input:nth-child(2)').value) || 0;
-    const qty = parseInt(row.querySelector('input:nth-child(3)').value) || 0;
-    const jumlah = harga * qty;
-    if(nama && harga && qty){
-      total += jumlah;
-      pesan += `${no}. ${nama}%0A`;
-      pesan += ` Harga: Rp${harga.toLocaleString('id-ID')}%0A`;
-      pesan += ` Qty: ${qty}%0A`;
-      pesan += ` Jumlah: Rp${jumlah.toLocaleString('id-ID')}%0A%0A`;
-      no++;
-    }
-  });
-  const ongkir = parseInt(document.getElementById('notaOngkir').value) || 0;
-  total += ongkir;
-  pesan += `Ongkir: Rp${ongkir.toLocaleString('id-ID')}%0A`;
-  pesan += `*TOTAL: Rp${total.toLocaleString('id-ID')}*`;
-
-  let waFormat = waPelanggan;
-  if(waFormat.startsWith('0')) waFormat = '62' + waFormat.substring(1);
-
-  window.open(`https://wa.me/${waFormat}?text=${pesan}`,'_blank');
-}
-
-// BELANJAAN 10 KOLOM
-function tambahBelanja(){
-  const i = document.querySelectorAll('#belanjaList input').length + 1;
-  if(i>10){alert('Max 10 item');return}
-  const input = document.createElement('input');
-  input.type='text';
-  input.className='input';
-  input.id='belanja'+i;
-  input.placeholder=`Item ${i}`;
-  input.style.marginBottom='8px';
-  document.getElementById('belanjaList').appendChild(input);
-}
-  // AKUN AUTO SAVE
-function loadAkun(){
-  document.getElementById('akunNama').value = akun.nama;
-  document.getElementById('akunAlamat').value = akun.alamat;
-  document.getElementById('akunWA').value = akun.wa;
-}
-function saveAkun(){
-  akun = {
-    nama:document.getElementById('akunNama').value,
-    alamat:document.getElementById('akunAlamat').value,
-    wa:document.getElementById('akunWA').value
-  };
-  localStorage.setItem('kurir_akun',JSON.stringify(akun));
-}
-
-// RIWAYAT
-function renderRiwayat(){
-  if(riwayat.length==0){
-    document.getElementById('riwayatList').innerHTML='<p style="text-align:center;color:var(--gray-500)">Belum ada riwayat</p>';
-    return;
-  }
-  const html = riwayat.map(r=>`
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-        <span class="badge">${r.jenis}</span>
-        <button onclick="hapusRiwayat(${r.id})" style="background:var(--danger);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:12px">Hapus</button>
-      </div>
-      <div style="font-size:13px;color:var(--gray-700)">${r.detail}</div>
-      <div style="font-size:11px;color:var(--gray-500);margin-top:8px">${r.tanggal}</div>
-    </div>
-  `).join('');
-  document.getElementById('riwayatList').innerHTML=html;
-}
-function hapusRiwayat(id){
-  if(confirm('Hapus riwayat ini?')){
-    riwayat = riwayat.filter(r=>r.id!=id);
-    localStorage.setItem('kurir_riwayat',JSON.stringify(riwayat));
-    renderRiwayat();
-  }
-}
-
-// Close modal klik luar
-document.querySelectorAll('.modal').forEach(m=>{
-  m.addEventListener('click',e=>{
-    if(e.target==m) closeModal();
-  });
-});
-
-// Init belanja 10 kolom
-for(let i=1;i<=10;i++){
-  const input = document.createElement('input');
-  input.type='text';
-  input.className='input';
-  input.id='belanja'+i;
-  input.placeholder=`Item ${i}`;
-  input.style.marginBottom='8px';
-  document.getElementById('belanjaList').appendChild(input);
-}
+function switchPage(p){ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active')); document.getElementById('page'+p).classList.add('active'); event.target.closest('.nav-item').classList.add('active'); }
 </script>
 </body>
 </html>
