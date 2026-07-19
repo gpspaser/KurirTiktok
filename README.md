@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -11,6 +12,19 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{background:var(--bg);color:var(--putih);min-height:100vh;background-image:radial-gradient(circle at 20% 50%,rgba(0,212,255,0.1) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,0,255,0.1) 0%,transparent 50%)}
 
+/* Pembungkus Utama agar tidak terlalu lebar di PC */
+.main-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: rgba(10, 10, 26, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  border-left: 1px solid rgba(0, 212, 255, 0.1);
+  border-right: 1px solid rgba(0, 212, 255, 0.1);
+}
+
 .header{text-align:center;padding:24px 16px;background:linear-gradient(135deg,rgba(255,107,0,0.2),rgba(0,212,255,0.2));border-bottom:2px solid var(--neon-orange);box-shadow:0 0 30px rgba(255,107,0,0.3)}
 .header h1{font-size:28px;font-weight:700;background:linear-gradient(90deg,#FF6B00,#00D4FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px rgba(0,212,255,0.5)}
 .header p{font-size:12px;color:var(--neon-blue);margin-top:6px;font-weight:600}
@@ -21,7 +35,7 @@ body{background:var(--bg);color:var(--putih);min-height:100vh;background-image:r
 .jam-item{background:rgba(0,0,0,0.4);padding:8px;border-radius:8px;border:1px solid rgba(255,107,0,0.3)}
 .jam-item b{color:var(--neon-orange)}
 
-.container{padding:16px;padding-bottom:80px}
+.container{padding:16px;padding-bottom:100px}
 .grid-layanan{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .layanan-card{
   background:var(--card);
@@ -37,7 +51,7 @@ body{background:var(--bg);color:var(--putih);min-height:100vh;background-image:r
 .layanan-card::before{
   content:'';
   position:absolute;
-top:-2px;left:-2px;right:-2px;bottom:-2px;
+  top:-2px;left:-2px;right:-2px;bottom:-2px;
   background:linear-gradient(45deg,var(--neon-orange),var(--neon-blue),var(--neon-pink));
   border-radius:16px;
   z-index:-1;
@@ -53,7 +67,8 @@ top:-2px;left:-2px;right:-2px;bottom:-2px;
 .layanan-card:nth-child(4){color:var(--neon-pink)}
 .layanan-nama{font-size:14px;font-weight:700;margin-bottom:4px}
 .layanan-desc{font-size:10px;color:var(--gray);line-height:1.3}
-.wa-float{position:fixed;bottom:20px;right:16px;background:var(--wa);color:var(--putih);border:none;border-radius:50px;padding:14px 20px;font-weight:700;font-size:13px;box-shadow:0 4px 20px rgba(37,211,102,0.5);cursor:pointer;display:flex;align-items:center;gap:8px;z-index:999}
+
+.wa-float{position:fixed;bottom:20px;right:16px;background:var(--wa);color:var(--putih);border:none;border-radius:50px;padding:14px 20px;font-weight:700;font-size:13px;box-shadow:0 4px 20px rgba(37,211,102,0.5);cursor:pointer;display:flex;align-items:center;gap:8px;z-index:999;text-decoration:none}
 
 /* MODAL */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);z-index:2000;align-items:center;justify-content:center}
@@ -111,45 +126,64 @@ top:-2px;left:-2px;right:-2px;bottom:-2px;
 .btn-submit:active{transform:scale(0.98)}
 
 .save-info{font-size:10px;color:var(--neon-green);text-align:center;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:4px}
+
+/* --- MEDIA QUERIES (FITUR RESPONSIVE) --- */
+
+/* Untuk Layar Sangat Kecil (HP jadul / HP layar kecil) */
+@media (max-width: 360px) {
+  .header h1 { font-size: 24px; }
+  .grid-layanan { grid-template-columns: 1fr; } /* Kartu jadi satu baris tunggal agar tidak sempit */
+  .jam-grid { grid-template-columns: 1fr; }
+  .jam-item style { grid-column: span 1; }
+}
+
+/* Penyesuaian Posisi Tombol WA Melayang di PC */
+@media (min-width: 600px) {
+  .wa-float {
+    right: calc(50% - 280px); /* Menjaga tombol WA tetap menempel di sisi kanan wrapper utama */
+  }
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Kurir TikTok</h1>
-  <p>PAMAN KURIR SIAP MELAYANI!</p>
-</div>
-
-<div class="jam-box">
-  <div class="jam-title">JADWAL OPERASIONAL</div>
-  <div class="jam-grid">
-    <div class="jam-item"><b>Senin-Kamis & Sabtu</b><br>08:00 - 17:00</div>
-    <div class="jam-item"><b>Jum'at Pagi</b><br>08:00 - 11:00</div>
-    <div class="jam-item" style="grid-column:span 2"><b>Jum'at Siang</b><br>14:00 - 17:00</div>
+<div class="main-wrapper">
+  <div class="header">
+    <h1>Kurir TikTok</h1>
+    <p>PAMAN KURIR SIAP MELAYANI!</p>
   </div>
-</div>
 
-<div class="container">
-  <div class="grid-layanan">
-    <div class="layanan-card" onclick="openModal('ojek')">
-      <i class="fi fi-sr-motorcycle layanan-icon"></i>
-      <div class="layanan-nama">OJEK</div>
-      <div class="layanan-desc">Antar Jemput Penumpang Cepat!</div>
+  <div class="jam-box">
+    <div class="jam-title">JADWAL OPERASIONAL</div>
+    <div class="jam-grid">
+      <div class="jam-item"><b>Senin-Kamis & Sabtu</b><br>08:00 - 17:00</div>
+      <div class="jam-item"><b>Jum'at Pagi</b><br>08:00 - 11:00</div>
+      <div class="jam-item" style="grid-column:span 2"><b>Jum'at Siang</b><br>14:00 - 17:00</div>
     </div>
-    <div class="layanan-card" onclick="openModal('food')">
-      <i class="fi fi-sr-shopping-bag layanan-icon"></i>
-      <div class="layanan-nama">FOOD & SHOPS</div>
-      <div class="layanan-desc">Beli Makanan & Belanjaan Mudah!</div>
-    </div>
-    <div class="layanan-card" onclick="openModal('delivery')">
-      <i class="fi fi-sr-box layanan-icon"></i>
-      <div class="layanan-nama">DELIVERY</div>
-      <div class="layanan-desc">Kirim Paket Aman & Cepat!</div>
-    </div>
-    <div class="layanan-card" onclick="openModal('ambil')">
-      <i class="fi-sr-shopping-bag layanan-icon"></i>
-      <div class="layanan-nama">AMBIL PESAN</div>
-      <div class="layanan-desc">Ambil Barang atau Pesanan Anda!</div>
+  </div>
+
+  <div class="container">
+    <div class="grid-layanan">
+      <div class="layanan-card" onclick="openModal('ojek')">
+        <i class="fi fi-sr-motorcycle layanan-icon"></i>
+        <div class="layanan-nama">OJEK</div>
+        <div class="layanan-desc">Antar Jemput Penumpang Cepat!</div>
+      </div>
+      <div class="layanan-card" onclick="openModal('food')">
+        <i class="fi fi-sr-shopping-bag layanan-icon"></i>
+        <div class="layanan-nama">FOOD & SHOPS</div>
+        <div class="layanan-desc">Beli Makanan & Belanjaan Mudah!</div>
+      </div>
+      <div class="layanan-card" onclick="openModal('delivery')">
+        <i class="fi fi-sr-box layanan-icon"></i>
+        <div class="layanan-nama">DELIVERY</div>
+        <div class="layanan-desc">Kirim Paket Aman & Cepat!</div>
+      </div>
+      <div class="layanan-card" onclick="openModal('ambil')">
+        <i class="fi fi-sr-shopping-bag layanan-icon"></i>
+        <div class="layanan-nama">AMBIL PESAN</div>
+        <div class="layanan-desc">Ambil Barang atau Pesanan Anda!</div>
+      </div>
     </div>
   </div>
 </div>
@@ -272,7 +306,7 @@ top:-2px;left:-2px;right:-2px;bottom:-2px;
 <div class="modal" id="modalAmbil">
   <div class="modal-content">
     <div class="modal-header">
-      <h3><i class="fi fi-sr-store"></i> Form Ambil Pesanan</h3>
+      <h3><i class="fi fi-sr-shopping-bag"></i> Form Ambil Pesanan</h3>
       <button class="close-btn" onclick="closeModal('ambil')">&times;</button>
     </div>
     <div class="form-group">
@@ -313,7 +347,6 @@ function init(){
   loadDataPelanggan();
 }
 
-// AUTO SAVE DATA PELANGGAN
 function autoSave(){
   const data = {
     nama: document.getElementById('ojekNama').value || document.getElementById('foodNama').value || document.getElementById('delNama').value || document.getElementById('ambilNama').value,
@@ -377,6 +410,7 @@ function submitOjek(){
   closeModal('ojek');
 }
 
+/* Sedikit perbaikan pada icon modal ambil pesanan agar konsisten dengan card-nya */
 function submitFood(){
   if(!validasi(['foodNama','foodWA','foodToko','foodDetail','foodAlamat'])) return;
   autoSave();
