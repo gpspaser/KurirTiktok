@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -38,7 +37,7 @@ body{background:var(--bg);color:var(--putih);min-height:100vh;background-image:r
 .layanan-card::before{
   content:'';
   position:absolute;
-  top:-2px;left:-2px;right:-2px;bottom:-2px;
+top:-2px;left:-2px;right:-2px;bottom:-2px;
   background:linear-gradient(45deg,var(--neon-orange),var(--neon-blue),var(--neon-pink));
   border-radius:16px;
   z-index:-1;
@@ -54,7 +53,6 @@ body{background:var(--bg);color:var(--putih);min-height:100vh;background-image:r
 .layanan-card:nth-child(4){color:var(--neon-pink)}
 .layanan-nama{font-size:14px;font-weight:700;margin-bottom:4px}
 .layanan-desc{font-size:10px;color:var(--gray);line-height:1.3}
-
 .wa-float{position:fixed;bottom:20px;right:16px;background:var(--wa);color:var(--putih);border:none;border-radius:50px;padding:14px 20px;font-weight:700;font-size:13px;box-shadow:0 4px 20px rgba(37,211,102,0.5);cursor:pointer;display:flex;align-items:center;gap:8px;z-index:999}
 
 /* MODAL */
